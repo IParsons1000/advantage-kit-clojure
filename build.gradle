@@ -59,6 +59,9 @@ clojure {
     }
 }
 
+sourceSets.main.compileClasspath += files("build/clojure/main")
+sourceSets.main.runtimeClasspath += files("build/clojure/main")
+
 java {
     // sourceCompatibility = JavaVersion.VERSION_17
     // targetCompatibility = JavaVersion.VERSION_17
@@ -73,7 +76,6 @@ tasks.withType(JavaCompile) {
 
 tasks.named('compileJava') {
     dependsOn compileClojure
-    classpath += files("build/clojure/main")
 }
 
 // link
@@ -81,7 +83,6 @@ tasks.named('compileJava') {
 jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     from sourceSets.main.allSource
-    from files("build/clojure/main")
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(robotMainClass)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
