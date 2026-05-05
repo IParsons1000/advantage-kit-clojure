@@ -139,3 +139,10 @@ deployArtifact.jarTask = jar
 
 wpi.sim.addGui().defaultEnabled = false
 wpi.sim.addDriverstation()
+
+// setup replay
+
+task(replayWatch, type: JavaExec) {
+    mainClass = "org.littletonrobotics.junction.ReplayWatch"
+    classpath = sourceSets.main.runtimeClasspath
+}
