@@ -2,13 +2,10 @@ plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2026.2.1"
     id 'dev.clojurephant.clojure' version '0.8.0'
-    id 'application'
     id 'com.gradleup.shadow' version '8.3.5'
 }
 
-application {
-    mainClass = 'frc.robot.TestLisp'
-}
+def robotMainClass = "frc.robot.Main"
 
 repositories {
     mavenCentral()
@@ -44,6 +41,7 @@ dependencies {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
 }
 
 clojure {
@@ -55,10 +53,29 @@ clojure {
     }
 }
 
+java {
+    // sourceCompatibility = JavaVersion.VERSION_17
+    // targetCompatibility = JavaVersion.VERSION_17
+}
+
 wpi.java.debugJni = false
 def includeDesktopSupport = true
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs.add '-XDstringConcat=inline'
+}
 
 tasks.named('compileJava') {
     dependsOn compileClojure
     classpath += files("build/clojure/main")
 }
+
+jar {
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.main.allSource
+    manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(robotMainClass)
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+wpi.java.configureExecutableTasks(jar)
+wpi.java.configureTestTasks(test)
