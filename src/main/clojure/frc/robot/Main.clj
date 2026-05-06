@@ -8,8 +8,8 @@
 
 (ns frc.robot.Main
   (:gen-class)
-  (:import (edu.wpi.first.wpilibj.RobotBase)
-           (frc.robot.Robot)))
+  (:import (edu.wpi.first.wpilibj RobotBase)
+           (frc.robot Robot)))
 
 (defn -main [args]
   (RobotBase/startRobot (Robot.)))

@@ -50,6 +50,9 @@ tasks.withType(Test) {
 
 def robotMainClass = "frc.robot.Main"
 
+sourceSets.main.compileClasspath += files("build/java/main")
+sourceSets.main.runtimeClasspath += files("build/java/main")
+
 clojure {
     builds {
         main {
@@ -59,8 +62,14 @@ clojure {
     }
 }
 
-sourceSets.main.compileClasspath += files("build/clojure/main")
-sourceSets.main.runtimeClasspath += files("build/clojure/main")
+tasks.named ("compileClojure") {
+    dependsOn tasks.named("compileJava")
+    destinationDir = file("build/clojure/main")
+}
+
+tasks.named ("checkClojure") {
+    dependsOn tasks.named("compileClojure")
+}
 
 java {
     // sourceCompatibility = JavaVersion.VERSION_17
@@ -72,10 +81,7 @@ def includeDesktopSupport = true
 
 tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
-}
-
-tasks.named('compileJava') {
-    dependsOn compileClojure
+    destinationDir = file("build/java/main")
 }
 
 // link
