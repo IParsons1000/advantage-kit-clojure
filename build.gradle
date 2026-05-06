@@ -38,6 +38,7 @@ dependencies {
 
     def akitJson = new groovy.json.JsonSlurper().parseText(new File(projectDir.getAbsolutePath() + "/vendordeps/AdvantageKit.json").text)
     annotationProcessor "org.littletonrobotics.akit:akit-autolog:$akitJson.version"
+
 }
 
 // setup tests
@@ -81,6 +82,7 @@ wpi.java.debugJni = false
 def includeDesktopSupport = true
 
 tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
     options.compilerArgs.add '-XDstringConcat=inline'
     destinationDir = file("build/java/main")
 }
