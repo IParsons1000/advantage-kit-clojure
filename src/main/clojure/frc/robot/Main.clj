@@ -12,4 +12,4 @@
            (frc.robot Robot)))
 
 (defn -main [&[args]]
-  (RobotBase/startRobot (Robot.)))
+  (RobotBase/startRobot #(Robot.)))
