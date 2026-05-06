@@ -8,4 +8,4 @@
 
 (defn -init [] ())
 
-(defn gettestlispprivate [] (test-lisp-private))
+(defn -gettestlispprivate [] test-lisp-private)
