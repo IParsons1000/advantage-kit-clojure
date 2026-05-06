@@ -11,5 +11,5 @@
   (:import (edu.wpi.first.wpilibj RobotBase)
            (frc.robot Robot)))
 
-(defn -main [args]
+(defn -main [&[args]]
   (RobotBase/startRobot (Robot.)))

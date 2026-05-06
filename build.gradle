@@ -89,6 +89,7 @@ tasks.withType(JavaCompile) {
 jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     from sourceSets.main.allSource
+    from files("build/java/main")
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(robotMainClass)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
