@@ -6,11 +6,12 @@
 ;; license that can be found in the LICENSE file
 ;; at the root directory of this project.
 
-(ns frc.robot.Main
-  (:gen-class)
-  (:require [frc.robot.Robot])
-  (:import (edu.wpi.first.wpilibj RobotBase)
-           (frc.robot Robot)))
+(ns frc.robot.Constants1
+  (:import (edu.wpi.first.wpilibj RobotBase)))
 
-(defn -main [&[args]]
-  (RobotBase/startRobot #(Robot.)))
+(def REAL 0)
+(def SIM 1)
+(def REPLAY 2)
+
+(def SimMode SIM)
+(def currentMode (if (= (RobotBase/isReal) REAL) REAL SimMode))
