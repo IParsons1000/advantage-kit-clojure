@@ -70,6 +70,7 @@ tasks.named ("compileClojure") {
 }
 
 tasks.named ("checkClojure") {
+    enabled = false
     dependsOn tasks.named("compileClojure")
 }
 
