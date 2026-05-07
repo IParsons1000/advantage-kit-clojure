@@ -14,4 +14,4 @@
 (def REPLAY 2)
 
 (def SimMode SIM)
-(def currentMode (if (= (RobotBase/isReal) REAL) REAL SimMode))
+(def currentMode (if (= (RobotBase/isReal) true) REAL SimMode))
