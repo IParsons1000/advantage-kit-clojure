@@ -39,26 +39,26 @@
             (Logger/addDataReceiver (WPILOGWriter. (LogFileUtil/addPathSuffix (LogFileUtil/findReplayLog) "_sim")))))
   (Logger/start))
 
-(defn -robotPeriodic [] (.. CommandScheduler (getInstance) (run)))
+(defn -robotPeriodic-void [] (.. CommandScheduler (getInstance) (run)))
 
-(defn -disabledInit [] ())
+(defn -disabledInit-void [] ())
 
-(defn -disabledPeriodic [] ())
+(defn -disabledPeriodic-void [] ())
 
-(defn -autonomousInit []
+(defn -autonomousInit-void []
   (swap! autonomousCommand (. robotContainer (getAutonomousCommand)))
   (if (not= autonomousCommand nil) (.. CommandScheduler (getInstance) (schedule autonomousCommand))))
 
-(defn -autonomousPeriodic [] ())
+(defn -autonomousPeriodic-void [] ())
 
-(defn -teleopInit [] (if (not= autonomousCommand nil) (. autonomousCommand (cancel))))
+(defn -teleopInit-void [] (if (not= autonomousCommand nil) (. autonomousCommand (cancel))))
 
-(defn -teleopPeriodic [] ())
+(defn -teleopPeriodic-void [] ())
 
-(defn -testInit [] (.. CommandScheduler (getInstance) (cancelAll)))
+(defn -testInit-void [] (.. CommandScheduler (getInstance) (cancelAll)))
 
-(defn -testPeriodic [] ())
+(defn -testPeriodic-void [] ())
 
-(defn -simulationInit [] ())
+(defn -simulationInit-void [] ())
 
-(defn -simulationPeriodic [] ())
+(defn -simulationPeriodic-void [] ())
