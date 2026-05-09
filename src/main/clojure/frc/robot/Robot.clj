@@ -15,7 +15,8 @@
            (org.littletonrobotics.junction LogFileUtil LoggedRobot Logger)
            (org.littletonrobotics.junction.networktables NT4Publisher)
            (org.littletonrobotics.junction.wpilog WPILOGReader WPILOGWriter)
-           (frc.robot RobotContainer)))
+           (frc.robot RobotContainer))
+  (:refer-clojure :exclude [run]))
 
 (def robotContainer (RobotContainer.))
 (def autonomousCommand (atom nil))
