@@ -6,7 +6,7 @@
 ;; license that can be found in the LICENSE file
 ;; at the root directory of this project.
 
-(ns frc.robot.Constants1
+(ns frc.robot.Constantsa
   (:import (edu.wpi.first.wpilibj RobotBase)))
 
 (def REAL 0)
@@ -14,4 +14,4 @@
 (def REPLAY 2)
 
 (def SimMode SIM)
-(def currentMode (if (= (RobotBase/isReal) true) REAL SimMode))
+(def currentMode (if (= false true) REAL SimMode))

@@ -10,7 +10,7 @@
   (:gen-class
     :extends org.littletonrobotics.junction.LoggedRobot
     :init init)
-  (:require [frc.robot.Constants1 :as Constants])
+  (:require [frc.robot.Constantsa :as Constants])
   (:import (edu.wpi.first.wpilibj2.command Command CommandScheduler)
            (org.littletonrobotics.junction LogFileUtil LoggedRobot Logger)
            (org.littletonrobotics.junction.networktables NT4Publisher)
@@ -18,7 +18,7 @@
            (frc.robot RobotContainer))
   (:refer-clojure :exclude [run]))
 
-(def robotContainer (RobotContainer.))
+(def robotContainer (atom nil))
 (def autonomousCommand (atom nil))
 
 (defn -init [this]
@@ -38,7 +38,8 @@
     Constants/REPLAY ((. this (setUseTiming false))
             (Logger/setReplaySource (WPILOGReader. (LogFileUtil/findReplayLog)))
             (Logger/addDataReceiver (WPILOGWriter. (LogFileUtil/addPathSuffix (LogFileUtil/findReplayLog) "_sim")))))
-  (Logger/start))
+  (Logger/start)
+  (swap! robotContainer (RobotContainer.)))
 
 (defn -robotPeriodic-void [] (.. CommandScheduler (getInstance) (run)))
 
