@@ -41,26 +41,26 @@
     ())
   (Logger/start))
 
-(defn -robotPeriodic-void [] (.. CommandScheduler (getInstance) (run)))
+(defn -robotPeriodic [] (.. CommandScheduler (getInstance) (run)))
 
-(defn -disabledInit-void [] ())
+(defn -disabledInit [] ())
 
-(defn -disabledPeriodic-void [] ())
+(defn -disabledPeriodic [] ())
 
-(defn -autonomousInit-void []
+(defn -autonomousInit []
   (set! autonomousCommand (. robotContainer (getAutonomousCommand)))
   (if (not= autonomousCommand nil) (.. CommandScheduler (getInstance) (schedule autonomousCommand))))
 
-(defn -autonomousPeriodic-void [] ())
+(defn -autonomousPeriodic [] ())
 
-(defn -teleopInit-void [] (if (not= autonomousCommand nil) (. autonomousCommand (cancel))))
+(defn -teleopInit [] (if (not= autonomousCommand nil) (. autonomousCommand (cancel))))
 
-(defn -teleopPeriodic-void [] ())
+(defn -teleopPeriodic [] ())
 
-(defn -testInit-void [] (.. CommandScheduler (getInstance) (cancelAll)))
+(defn -testInit [] (.. CommandScheduler (getInstance) (cancelAll)))
 
-(defn -testPeriodic-void [] ())
+(defn -testPeriodic [] ())
 
-(defn -simulationInit-void [] ())
+(defn -simulationInit [] ())
 
-(defn -simulationPeriodic-void [] ())
+(defn -simulationPeriodic [] ())
