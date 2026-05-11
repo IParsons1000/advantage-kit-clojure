@@ -18,7 +18,7 @@
            (frc.robot RobotContainer))
   (:refer-clojure :exclude [run]))
 
-(def robotContainer (atom nil))
+(def robotContainer (delay (RobotContainer.)))
 (def autonomousCommand (atom nil))
 
 (defn -init []
@@ -31,15 +31,15 @@
 ;;                                       0 "All changes committed"
 ;;                                       1 "Uncommitted changes"
 ;;                                         "Unknown"))
-  (case (Constants/currentMode)
+  (case Constants/currentMode
     Constants/REAL ((Logger/addDataReceiver (WPILOGWriter.))
           (Logger/addDataReceiver (NT4Publisher.)))
     Constants/SIM (Logger/addDataReceiver (NT4Publisher.))
     Constants/REPLAY ((comment . this (setUseTiming false))
             (Logger/setReplaySource (WPILOGReader. (LogFileUtil/findReplayLog)))
-            (Logger/addDataReceiver (WPILOGWriter. (LogFileUtil/addPathSuffix (LogFileUtil/findReplayLog) "_sim")))))
-  (Logger/start)
-  (swap! robotContainer (RobotContainer.)))
+            (Logger/addDataReceiver (WPILOGWriter. (LogFileUtil/addPathSuffix (LogFileUtil/findReplayLog) "_sim"))))
+    ())
+  (Logger/start))
 
 (defn -robotPeriodic-void [] (.. CommandScheduler (getInstance) (run)))
 
@@ -48,7 +48,7 @@
 (defn -disabledPeriodic-void [] ())
 
 (defn -autonomousInit-void []
-  (swap! autonomousCommand (. robotContainer (getAutonomousCommand)))
+  (set! autonomousCommand (. robotContainer (getAutonomousCommand)))
   (if (not= autonomousCommand nil) (.. CommandScheduler (getInstance) (schedule autonomousCommand))))
 
 (defn -autonomousPeriodic-void [] ())
