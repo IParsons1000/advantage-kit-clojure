@@ -48,12 +48,12 @@
 (defn -disabledPeriodic [& _] ())
 
 (defn -autonomousInit [& _]
-  (set! autonomousCommand (. robotContainer (getAutonomousCommand)))
-  (if (not= autonomousCommand nil) (.. CommandScheduler (getInstance) (schedule autonomousCommand))))
+  (reset! autonomousCommand (. @robotContainer (getAutonomousCommand)))
+  (if (not= @autonomousCommand nil) (.. CommandScheduler (getInstance) (schedule @autonomousCommand))))
 
 (defn -autonomousPeriodic [& _] ())
 
-(defn -teleopInit [& _] (if (not= autonomousCommand nil) (. autonomousCommand (cancel))))
+(defn -teleopInit [& _] (if (not= @autonomousCommand nil) (. @autonomousCommand (cancel))))
 
 (defn -teleopPeriodic [& _] ())
 
