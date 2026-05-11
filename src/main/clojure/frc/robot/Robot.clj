@@ -35,7 +35,7 @@
     Constants/REAL ((Logger/addDataReceiver (WPILOGWriter.))
           (Logger/addDataReceiver (NT4Publisher.)))
     Constants/SIM (Logger/addDataReceiver (NT4Publisher.))
-    Constants/REPLAY ((. this (setUseTiming false))
+    Constants/REPLAY ((comment . this (setUseTiming false))
             (Logger/setReplaySource (WPILOGReader. (LogFileUtil/findReplayLog)))
             (Logger/addDataReceiver (WPILOGWriter. (LogFileUtil/addPathSuffix (LogFileUtil/findReplayLog) "_sim")))))
   (Logger/start)
