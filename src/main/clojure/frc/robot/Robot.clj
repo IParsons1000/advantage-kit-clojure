@@ -10,7 +10,7 @@
   (:gen-class
     :extends org.littletonrobotics.junction.LoggedRobot
     :init init)
-  (:require [frc.robot.Constantsa :as Constants])
+  (:require [frc.robot.Constantsa :as Constants] [frc.robot.RobotContainer])
   (:import (edu.wpi.first.wpilibj2.command Command CommandScheduler)
            (org.littletonrobotics.junction LogFileUtil LoggedRobot Logger)
            (org.littletonrobotics.junction.networktables NT4Publisher)
